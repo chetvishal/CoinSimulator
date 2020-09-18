@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Market from '../screens/market'
@@ -9,7 +9,6 @@ import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export const RootDrawerNavigator = () => (
-
     <Navigator initialRouteName="Market">
         <Screen
             name="Market"

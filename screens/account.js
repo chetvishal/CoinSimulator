@@ -11,6 +11,7 @@ export default function Account() {
 
 const styles = StyleSheet.create({
     text: {
-        marginTop: 45
+        marginTop: 45,
+        fontWeight: 'bold'
     }
 })
