@@ -1,11 +1,20 @@
-import React, { useContext } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import { Button, Card, Title, Paragraph, DataTable } from 'react-native-paper';
-import { CoinContext } from '../contexts/coinContext';
+import { CoinContext, fetchCoins } from '../contexts/coinContext';
 
 export default function Market() {
 
     const { coins } = useContext(CoinContext);
+    const [cryptos, setCoins] = useState([]);
+
+    useEffect(() => {
+        const fetchAPI = async () => {
+          setCoins(await fetchCoins());
+        };
+    
+        fetchAPI();
+      }, []);
 
     return (
         <ScrollView>
@@ -16,21 +25,20 @@ export default function Market() {
                     <DataTable.Title numeric><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> Price </Text></DataTable.Title>
                 </DataTable.Header>
 
-
                 {
-                    coins && coins.map(coin => {
+                    cryptos && cryptos.map(coin => {
+                        const color = coin.price_change_percentage_24h > 0 ? 'green' : 'red';
                         return (
                             <DataTable.Row key={coin.id}>
+                                <Image source={{ uri: coin.image }} style={{height: 30, width: 30, marginTop: 10, marginRight: 15}} alt="img"/>       
                                 <DataTable.Cell>{coin.id}</DataTable.Cell>
-                                <DataTable.Cell numeric>{coin.price_change_24h}</DataTable.Cell>
-                                <DataTable.Cell numeric>{coin.current_price}</DataTable.Cell>
+                                <DataTable.Cell numeric><Text style={{color: color}}>{coin.price_change_percentage_24h}%</Text></DataTable.Cell>
+                                <DataTable.Cell numeric>${coin.current_price}</DataTable.Cell>
                             </DataTable.Row>
                         )
                     })
                 }
-
-
-
+                
             </DataTable>
         </ScrollView>
     )
