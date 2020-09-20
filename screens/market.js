@@ -30,9 +30,9 @@ export default function Market() {
                         const color = coin.price_change_percentage_24h > 0 ? 'green' : 'red';
                         return (
                             <DataTable.Row key={coin.id}>
-                                <Image source={{ uri: coin.image }} style={{height: 30, width: 30, marginTop: 10, marginRight: 15}} alt="img"/>       
-                                <DataTable.Cell>{coin.id}</DataTable.Cell>
-                                <DataTable.Cell numeric><Text style={{color: color}}>{coin.price_change_percentage_24h}%</Text></DataTable.Cell>
+                            {/* , marginTop: 10, marginRight: 15 */}
+                                <DataTable.Cell> <Image source={{ uri: coin.image }} style={{height: 20, width: 20, marginRight: 15,}} alt="img"/> {coin.id}</DataTable.Cell>
+                                <DataTable.Cell numeric><Text style={{color: color}}>{coin.price_change_percentage_24h.toFixed(2)}%</Text></DataTable.Cell>
                                 <DataTable.Cell numeric>${coin.current_price}</DataTable.Cell>
                             </DataTable.Row>
                         )
