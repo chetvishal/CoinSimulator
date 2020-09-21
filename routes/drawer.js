@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import Market from '../screens/market'
+import MarketNavigator from './marketStack'
 import Account from '../screens/account'
 import Portfolio from '../screens/portfolio'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -12,7 +12,7 @@ export const RootDrawerNavigator = () => (
     <Navigator initialRouteName="Market">
         <Screen
             name="Market"
-            component={Market}
+            component={MarketNavigator}
             options={{
                 tabBarIcon: () => (
                     <Entypo name="shop" size={24} color="black" />
