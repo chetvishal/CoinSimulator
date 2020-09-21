@@ -5,7 +5,7 @@ import { CoinContext, fetchCoins } from '../contexts/coinContext';
 
 export default function Market() {
 
-    const { coins } = useContext(CoinContext);
+    const { addCoin } = useContext(CoinContext);
     const [cryptos, setCoins] = useState([]);
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export default function Market() {
                     cryptos && cryptos.map(coin => {
                         const color = coin.price_change_percentage_24h > 0 ? 'green' : 'red';
                         return (
-                            <DataTable.Row key={coin.id}>
+                            <DataTable.Row key={coin.id} onPress={() => { addCoin(coin.id) }}>
                             {/* , marginTop: 10, marginRight: 15 */}
                                 <DataTable.Cell> <Image source={{ uri: coin.image }} style={{height: 20, width: 20, marginRight: 15,}} alt="img"/> {coin.id}</DataTable.Cell>
                                 <DataTable.Cell numeric><Text style={{color: color}}>{coin.price_change_percentage_24h.toFixed(2)}%</Text></DataTable.Cell>
