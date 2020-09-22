@@ -1,12 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, TouchableWithoutFeedback } from 'react-native';
 import { Button, Card, Title, Paragraph, DataTable } from 'react-native-paper';
-import { CoinContext, fetchCoins } from '../contexts/coinContext';
+import { fetchCoins } from '../contexts/coinContext';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function Market({ navigation }) {
 
-    const { addCoin } = useContext(CoinContext);
     const [cryptos, setCoins] = useState([]);
 
     useEffect(() => {

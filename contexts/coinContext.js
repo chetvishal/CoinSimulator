@@ -21,12 +21,30 @@ const CoinContextProvider = (props) => {
         {coin: 'tron', key: 4 },
     ]);
 
+    const [favCoinData, setFavData] = useState([]);
+
+    const favData = async () => {
+        try{
+            favCoin.map( async coin => {
+                const {data} = await axios.get(`https://api.coingecko.com/api/v3/coins/${coin.coin}`)
+                setFavData([...favCoinData, { id: data.id, price: data.market_data.current_price.usd }])
+                // change24: coin.price_change_percentage_24h.toFixed(2),
+                
+            })
+        }catch(err){
+
+        }
+    }
+
+    // favData();
+
+
     const addCoin = (coin) => {
         setFavCoins([...favCoin, { coin: coin, key: Math.random() * (500 - 1) + 1}])
     }
 
     return (
-        <CoinContext.Provider value={{ favCoin, addCoin }}>
+        <CoinContext.Provider value={{ favCoin, addCoin, favCoinData  }}>
             {props.children}
         </CoinContext.Provider>
     );
