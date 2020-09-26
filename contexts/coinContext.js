@@ -15,36 +15,60 @@ export const fetchCoins = async () => {
 const CoinContextProvider = (props) => {
 
     const [favCoin, setFavCoins] = useState([
-        {coin: 'bitcoin', key: 1 },
-        {coin: 'ripple', key: 2 },
-        {coin: 'dogecoin', key: 3 },
-        {coin: 'tron', key: 4 },
+        // {coin: 'bitcoin', qty: 3,key: 1 },
+        // {coin: 'ripple', qty: 3,key: 2 },
+        // {coin: 'dogecoin', qty: 3,key: 3 },
+        // {coin: 'tron', qty: 2,key: 4 },
     ]);
 
-    const [favCoinData, setFavData] = useState([]);
+    const [balance, setBalance] = useState(5000);
 
-    const favData = async () => {
-        try{
-            favCoin.map( async coin => {
-                const {data} = await axios.get(`https://api.coingecko.com/api/v3/coins/${coin.coin}`)
-                setFavData([...favCoinData, { id: data.id, price: data.market_data.current_price.usd }])
-                // change24: coin.price_change_percentage_24h.toFixed(2),
-                
+
+    const addCoin = (coin, qty) => {
+
+        var found = false;
+
+        if(favCoin){
+            favCoin.map(crypto => {
+                if(crypto.coin === coin){
+                    crypto.qty = (parseFloat(`${crypto.qty}`) + parseFloat(`${qty}`)).toFixed(2);
+                    found = true;
+                }
             })
-        }catch(err){
-
+            if(!found){
+                setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), key: Math.random() * (500 - 1) + 1}])
+            }
         }
+        else{
+            setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), key: Math.random() * (500 - 1) + 1}])
+        }
+
+        // favCoin ? favCoin.map(crypto => {
+        //     if(crypto.coin === coin){
+        //         crypto.qty = crypto.qty + parseFloat(qty).toFixed(2) 
+        //         return 1;
+        //     }
+        // }) : setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), key: Math.random() * (500 - 1) + 1}])
     }
 
-    // favData();
+    const removeCoin = (coin, qty) => {
+        var found = false;
 
-
-    const addCoin = (coin) => {
-        setFavCoins([...favCoin, { coin: coin, key: Math.random() * (500 - 1) + 1}])
+        if(favCoin){
+            favCoin.map(crypto => {
+                if(crypto.coin === coin){
+                    crypto.qty = (parseFloat(`${crypto.qty}`) - parseFloat(`${qty}`)).toFixed(2);
+                    found = true;
+                }
+            })
+        }
+        // else{
+        //     setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), key: Math.random() * (500 - 1) + 1}])
+        // }
     }
 
-    return (
-        <CoinContext.Provider value={{ favCoin, addCoin, favCoinData  }}>
+    return(
+        <CoinContext.Provider value={{ favCoin, addCoin, removeCoin, balance, setBalance  }}>
             {props.children}
         </CoinContext.Provider>
     );

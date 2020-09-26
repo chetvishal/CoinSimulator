@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import MarketNavigator from './marketStack'
 import Account from '../screens/account'
-import Portfolio from '../screens/portfolio'
+import PortfolioNavigator from './portfolioStack'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -20,12 +20,13 @@ export const RootDrawerNavigator = () => (
             }}
         />
         <Screen
-            name="Portfolio"
-            component={Portfolio}
+            name="PortfolioNavigator"
+            component={PortfolioNavigator}
             options={{
                 tabBarIcon: () => (
                     <MaterialCommunityIcons name="finance" size={24} color="black" />
                 ),
+                title:"Portfolio"
             }}
         />
         <Screen

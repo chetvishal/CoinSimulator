@@ -21,8 +21,8 @@ export default function Market({ navigation }) {
 
             <DataTable>
                 <DataTable.Header>
-                    <DataTable.Title><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> CryptoCurrency </Text></DataTable.Title>
-                    <DataTable.Title numeric><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> Change (24h) </Text></DataTable.Title>
+                    <DataTable.Title><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> Coin </Text></DataTable.Title>
+                    <DataTable.Title numeric><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> 24h </Text></DataTable.Title>
                     <DataTable.Title numeric><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> Price </Text></DataTable.Title>
                 </DataTable.Header>
 
