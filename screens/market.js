@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Button, Card, Title, Paragraph, DataTable } from 'react-native-paper';
 import { fetchCoins } from '../contexts/coinContext';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -31,12 +31,14 @@ export default function Market({ navigation }) {
                         {/* addCoin(coin.id) */}
                         const color = coin.price_change_percentage_24h > 0 ? 'green' : 'red';
                         return (
-                            <DataTable.Row key={coin.id} onPress={() => { navigation.navigate('CoinPg', coin) }}>
+                            <TouchableOpacity key={coin.id} onPress={() => { navigation.navigate('CoinPg', coin) }}>
+                            <DataTable.Row>
                                 {/* , marginTop: 10, marginRight: 15 */}
                                 <DataTable.Cell> <Image source={{ uri: coin.image }} style={{ height: 20, width: 20, marginRight: 15, }} alt="img" /> {coin.id}</DataTable.Cell>
                                 <DataTable.Cell numeric><Text style={{ color: color }}>{coin.price_change_percentage_24h.toFixed(2)}%</Text></DataTable.Cell>
                                 <DataTable.Cell numeric>${coin.current_price}</DataTable.Cell>
                             </DataTable.Row>
+                            </TouchableOpacity>
                         )
                     })
                 }

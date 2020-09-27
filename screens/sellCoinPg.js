@@ -77,7 +77,7 @@ export default function SellCoinPg({ route, navigation }) {
                 <View style={{ backgroundColor: 'white' }}>
                     <Text style={{color: 'black'}}>You've successfully sold your cryptocurrency</Text>
                    { 
-                       Profit_Loss > 0 ? <Text style={{color: 'green'}}>You've gained ${Profit_Loss} </Text> : <Text style={{color: 'red'}}>You've lost ${Profit_Loss} </Text>
+                       Profit_Loss > 0 ? <Text style={{color: 'green'}}>You've gained ${parseFloat(Profit_Loss).toFixed(2)} </Text> : <Text style={{color: 'red'}}>You've lost ${parseFloat(Profit_Loss).toFixed(2)} </Text>
                        
                     }
                     {/* <Button onPress={hideModal}>
