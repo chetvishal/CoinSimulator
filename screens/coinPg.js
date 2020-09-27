@@ -16,6 +16,7 @@ export default function CoinPg({ route, navigation }) {
     const reviewSchema = yup.object({
         quantity: yup.number()
             .required()
+            .positive()
             .test('postive', 'Quantity should be a positive number', (val) => {
                 return parseFloat(val) > 0 ;
             })
@@ -36,7 +37,7 @@ export default function CoinPg({ route, navigation }) {
                 initialValues={{ quantity: '' }}
                 onSubmit={(values, actions) => {
                     setBalance( balance - (values.quantity * route.params.current_price));
-                    addCoin(route.params.id, values.quantity)
+                    addCoin(route.params.id, values.quantity, route.params.current_price)
                     actions.resetForm();
                     navigation.navigate('Market');
                 }}

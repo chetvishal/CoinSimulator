@@ -15,7 +15,7 @@ export const fetchCoins = async () => {
 const CoinContextProvider = (props) => {
 
     const [favCoin, setFavCoins] = useState([
-        // {coin: 'bitcoin', qty: 3,key: 1 },
+        // {coin: 'bitcoin', qty: 3,key: 1, avg_price: 10000 },
         // {coin: 'ripple', qty: 3,key: 2 },
         // {coin: 'dogecoin', qty: 3,key: 3 },
         // {coin: 'tron', qty: 2,key: 4 },
@@ -24,7 +24,7 @@ const CoinContextProvider = (props) => {
     const [balance, setBalance] = useState(5000);
 
 
-    const addCoin = (coin, qty) => {
+    const addCoin = (coin, qty, price) => {
 
         var found = false;
 
@@ -32,15 +32,16 @@ const CoinContextProvider = (props) => {
             favCoin.map(crypto => {
                 if(crypto.coin === coin){
                     crypto.qty = (parseFloat(`${crypto.qty}`) + parseFloat(`${qty}`)).toFixed(2);
+                    crypto.avg_price = (parseFloat(`${crypto.avg_price}`) + parseFloat(`${price}`)) / 2;
                     found = true;
                 }
             })
             if(!found){
-                setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), key: Math.random() * (500 - 1) + 1}])
+                setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), avg_price: price,  key: Math.random() * (500 - 1) + 1}])
             }
         }
         else{
-            setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), key: Math.random() * (500 - 1) + 1}])
+            setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), avg_price: price,  key: Math.random() * (500 - 1) + 1}])
         }
 
         // favCoin ? favCoin.map(crypto => {
@@ -52,19 +53,17 @@ const CoinContextProvider = (props) => {
     }
 
     const removeCoin = (coin, qty) => {
-        var found = false;
 
         if(favCoin){
-            favCoin.map(crypto => {
+            favCoin.map((crypto, i) => {
                 if(crypto.coin === coin){
                     crypto.qty = (parseFloat(`${crypto.qty}`) - parseFloat(`${qty}`)).toFixed(2);
-                    found = true;
+                    if(parseFloat(crypto.qty) === parseFloat(0)){
+                        favCoin.splice(i, 1);
+                    }
                 }
             })
         }
-        // else{
-        //     setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), key: Math.random() * (500 - 1) + 1}])
-        // }
     }
 
     return(
