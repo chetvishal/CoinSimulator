@@ -65,9 +65,9 @@ export default function SellCoinPg({ route, navigation }) {
                         <Button onPress={props.handleSubmit}>
                             Sell
                         </Button>
-                        <Button onPress={showModal}>
+                        {/* <Button onPress={showModal}>
                             Show Modal
-                        </Button>
+                        </Button> */}
 
                     </View>
                 )
@@ -76,7 +76,7 @@ export default function SellCoinPg({ route, navigation }) {
             <Modal visible={visible} onDismiss={hideModal} >
                 <View style={{ backgroundColor: 'white' }}>
                     <Text style={{color: 'black'}}>You've successfully sold your cryptocurrency</Text>
-                   { 
+                    { 
                        Profit_Loss > 0 ? <Text style={{color: 'green'}}>You've gained ${parseFloat(Profit_Loss).toFixed(2)} </Text> : <Text style={{color: 'red'}}>You've lost ${parseFloat(Profit_Loss).toFixed(2)} </Text>
                        
                     }

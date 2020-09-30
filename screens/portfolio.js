@@ -5,7 +5,7 @@ import { Card, Title, Paragraph, DataTable, Button, Dialog, Portal, Provider } f
 import { fetchCoins } from '../contexts/coinContext';
 
 export default function Portfolio({ navigation }) {
-    const { favCoin, balance } = useContext(CoinContext);
+    const { favCoin, balance, getLocal, arr } = useContext(CoinContext);
 
     const [coins, setCoins] = useState([]);
 
@@ -20,7 +20,7 @@ export default function Portfolio({ navigation }) {
     }, [coins]);
 
     const portfolioValue = () => {
-        coins && coins.map(coin => {
+        favCoin && coins && coins.map(coin => {
             var i = 0;
             while (i < favCoin.length) {
                 if (coin.id === favCoin[i].coin) {
@@ -58,7 +58,7 @@ export default function Portfolio({ navigation }) {
                 </DataTable.Header>
 
                 {
-                    coins && coins.map(coin => {
+                    favCoin && coins && coins.map(coin => {
                         const color = coin.price_change_percentage_24h > 0 ? 'green' : 'red';
                         var i = 0;
                         while (i < favCoin.length) {
@@ -82,7 +82,6 @@ export default function Portfolio({ navigation }) {
                                     </DataTable.Row>
                                 )
                             }
-
                             i++;
                         }
                     })
@@ -91,6 +90,8 @@ export default function Portfolio({ navigation }) {
 
             </DataTable>
             <Button onPress={() => console.log(favCoin)}>press me</Button>
+            <Button onPress={() => console.log(JSON.stringify(getLocal()))}>getLocal me</Button>
+            <Button onPress={() => console.log(arr)}>arr me</Button>
 
         </ScrollView>
     )

@@ -29,6 +29,7 @@ export const RootDrawerNavigator = () => (
                 title:"Portfolio"
             }}
         />
+        
         <Screen
             name="Account"
             component={Account}
