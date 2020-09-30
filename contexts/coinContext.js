@@ -74,7 +74,7 @@ const CoinContextProvider = (props) => {
         , () => {
             const localData = AsyncStorage.getItem('FAVCOINS1');
             console.log('from favCoin ', JSON.stringify(localData))
-            return JSON.stringify(localData) !== '{"_40":0,"_65":0,"_55":null,"_72":null}' ? JSON.parse(localData) : [];
+            return localData ? JSON.parse(localData) : [];
     }
     );
 
