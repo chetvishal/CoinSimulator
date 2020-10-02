@@ -91,7 +91,7 @@ export default function Portfolio({ navigation }) {
             </DataTable>
             <Button onPress={() => console.log(favCoin)}>press me</Button>
             <Button onPress={() => console.log(JSON.stringify(getLocal()))}>getLocal me</Button>
-            <Button onPress={() => console.log(arr)}>arr me</Button>
+            <Button onPress={() => console.log(favCoin)}>arr me</Button>
 
         </ScrollView>
     )

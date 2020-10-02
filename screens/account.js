@@ -25,6 +25,7 @@ export default function Account() {
             if (value !== null) {
                 // We have data!!
                 console.log(JSON.parse(value));
+                return JSON.parse(value)
             }else{
                 console.log('array is empty')
             }
@@ -53,7 +54,7 @@ export default function Account() {
             </Button> 
 
              <Button
-                onPress={handleCheck}
+                onPress={() => console.log(handleCheck())}
             >
                 Check local data
             </Button>
