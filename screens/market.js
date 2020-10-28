@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Button, Card, Title, Paragraph, DataTable } from 'react-native-paper';
 import { fetchCoins } from '../contexts/coinContext';
-import { MaterialIcons } from '@expo/vector-icons';
 
 export default function Market({ navigation }) {
 
@@ -20,10 +19,10 @@ export default function Market({ navigation }) {
         <ScrollView>
 
             <DataTable>
-                <DataTable.Header>
-                    <DataTable.Title><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> Coin </Text></DataTable.Title>
-                    <DataTable.Title numeric><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> 24h </Text></DataTable.Title>
-                    <DataTable.Title numeric><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> Price </Text></DataTable.Title>
+                <DataTable.Header style={{backgroundColor: '#eef2f5', height: 45}}>
+                    <DataTable.Title><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> Coin </Text></DataTable.Title>
+                    <DataTable.Title numeric><Text style={{ fontSize: 15, fontWeight: 'normal',  color: 'black' , fontFamily: 'futura-pt-medium'}}> 24h </Text></DataTable.Title>
+                    <DataTable.Title numeric><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> Price </Text></DataTable.Title>
                 </DataTable.Header>
 
                 {
@@ -32,11 +31,11 @@ export default function Market({ navigation }) {
                         const color = coin.price_change_percentage_24h > 0 ? 'green' : 'red';
                         return (
                             <TouchableOpacity key={coin.id} onPress={() => { navigation.navigate('CoinPg', coin) }}>
-                            <DataTable.Row>
+                            <DataTable.Row style={{backgroundColor: 'white', height: 70}} >
                                 {/* , marginTop: 10, marginRight: 15 */}
-                                <DataTable.Cell> <Image source={{ uri: coin.image }} style={{ height: 20, width: 20, marginRight: 15, }} alt="img" /> {coin.id}</DataTable.Cell>
-                                <DataTable.Cell numeric><Text style={{ color: color }}>{coin.price_change_percentage_24h.toFixed(2)}%</Text></DataTable.Cell>
-                                <DataTable.Cell numeric>${coin.current_price}</DataTable.Cell>
+                                <DataTable.Cell > <Image source={{ uri: coin.image }} style={{ height: 20, width: 20, marginRight: 15, }} alt="img" /> <Text style={{ fontWeight: 'normal', fontSize: 17, textTransform: 'capitalize', fontFamily: 'future-pt-book' }}>{coin.id}</Text></DataTable.Cell>
+                                <DataTable.Cell numeric><Text style={{ color: color, fontWeight: 'normal', fontSize: 17 , fontFamily: 'future-pt-book'}}>{coin.price_change_percentage_24h ? coin.price_change_percentage_24h.toFixed(2) : 0.0}%</Text></DataTable.Cell>
+                                <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17 , fontFamily: 'future-pt-book'}}>${coin.current_price}</Text></DataTable.Cell>
                             </DataTable.Row>
                             </TouchableOpacity>
                         )

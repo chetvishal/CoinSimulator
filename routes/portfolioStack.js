@@ -15,13 +15,23 @@ const PortfolioNavigator = ({navigation}) => {
                 component={Portfolio}
                 options={{
                     headerStyle: {
-                        height: 60
+                        height: 90,
+                        backgroundColor: '#414e54',
+                    },
+                    headerTitle: 'Portfolio',
+                    headerTitleStyle: {
+                        fontFamily: 'futura-pt-medium',
+                        color: 'white',
+                        fontSize: 20
                     }
                 }}
             />
             <Screen 
                 name="SellCoinPg"
                 component={SellCoinPg}
+                options={{
+                    headerTitle: 'Sell Coin'
+                }}
             />
 
         </Navigator>

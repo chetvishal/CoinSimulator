@@ -15,14 +15,25 @@ const MarketNavigator = ({navigation}) => {
                 component={Market}
                 options={{
                     headerStyle: {
-                        height: 60
+                        height: 90,
+                        backgroundColor: '#414e54',
+                        // #414e54 - its shade of black #577fec - its blue
+                        
+                    },
+                    headerTitle: 'Top 100 Coins by Capitalization',
+                    headerTitleStyle: {
+                        fontFamily: 'futura-pt-medium',
+                        color: 'white',
+                        fontSize: 20
                     }
+                    // title: 'MARKET - Top 100 Coins'
+                    
                 }}
             />
             <Screen 
                 name="CoinPg"
                 component={CoinPg}
-                options={{title: 'Coin Details'}}
+                options={{title: `Coin Details`}}
             />
         </Navigator>
     )

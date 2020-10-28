@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import { CoinContext } from '../contexts/coinContext';
 import { Card, Title, Paragraph, DataTable, Button, Dialog, Portal, Provider } from 'react-native-paper';
 import { fetchCoins } from '../contexts/coinContext';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Portfolio({ navigation }) {
     const { favCoin, balance, getLocal, arr } = useContext(CoinContext);
@@ -40,21 +41,21 @@ export default function Portfolio({ navigation }) {
 
                 <Card.Content style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                     <View>
-                        <Paragraph >Portfolio Value</Paragraph>
-                        <Title>${sum.toFixed(2)}</Title>
+                        <Paragraph style={{fontFamily: 'futura-pt-medium', fontSize: 15}}>Portfolio Value</Paragraph>
+                        <Title style={{fontFamily: 'futura-pt-bold', fontWeight: 'bold'}}>${sum.toFixed(2)}</Title>
                     </View>
                     <View style={{}}>
-                        <Paragraph >Balance</Paragraph>
-                        <Title>${balance.toFixed(2)}</Title>
+                        <Paragraph style={{fontFamily: 'futura-pt-medium' , fontSize: 15}}>Balance</Paragraph>
+                        <Title style={{fontFamily: 'futura-pt-bold', fontWeight: 'bold'}}>${balance.toFixed(2)}</Title>
                     </View>
                 </Card.Content>
             </Card>
             <DataTable>
-                <DataTable.Header>
-                    <DataTable.Title><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> Coin </Text></DataTable.Title>
-                    <DataTable.Title numeric><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> 24h </Text></DataTable.Title>
-                    <DataTable.Title numeric><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> Price </Text></DataTable.Title>
-                    <DataTable.Title numeric><Text style={{ fontSize: 13, fontWeight: 'bold', color: 'black' }}> Holdings </Text></DataTable.Title>
+                <DataTable.Header style={{backgroundColor: '#eef2f5', height: 45}}>
+                    <DataTable.Title><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> Coin </Text></DataTable.Title>
+                    <DataTable.Title numeric><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> 24h </Text></DataTable.Title>
+                    <DataTable.Title numeric><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> Price </Text></DataTable.Title>
+                    <DataTable.Title numeric><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> Holdings </Text></DataTable.Title>
                 </DataTable.Header>
 
                 {
@@ -65,21 +66,29 @@ export default function Portfolio({ navigation }) {
                             if (coin.id === favCoin[i].coin) {
                                 return (
 
-                                    <DataTable.Row key={coin.id} onPress={() => {
-                                        navigation.navigate('SellCoinPg', {
-                                            id: coin.id,
-                                            current_price: coin.current_price,
-                                            qty: favCoin[i].qty,
-                                            avg_price: favCoin[i].avg_price
-                                        })
-                                    }}>
-                                        {/* coin, favCoin[i].qty */}
-                                        {/* , marginTop: 10, marginRight: 15 */}
-                                        <DataTable.Cell> <Image source={{ uri: coin.image }} style={{ height: 20, width: 20, marginRight: 15, }} alt="img" /> {coin.symbol}</DataTable.Cell>
-                                        <DataTable.Cell numeric><Text style={{ color: color }}>{coin.price_change_percentage_24h.toFixed(2)}%</Text></DataTable.Cell>
-                                        <DataTable.Cell numeric>${coin.current_price.toFixed(2)}</DataTable.Cell>
-                                        <DataTable.Cell numeric>{favCoin[i].qty}</DataTable.Cell>
-                                    </DataTable.Row>
+                                    <TouchableOpacity
+                                        key={coin.id}
+                                        onPress={() => {
+                                            navigation.navigate('SellCoinPg', {
+                                                id: coin.id,
+                                                current_price: coin.current_price,
+                                                qty: favCoin[i].qty,
+                                                avg_price: favCoin[i].avg_price,
+                                                market_cap: coin.market_cap,
+                                                high_24h: coin.high_24h,
+                                                low_24h: coin.low_24h
+                                            })
+                                        }}
+                                    >
+                                        <DataTable.Row style={{backgroundColor: 'white', height: 70}}>
+                                            {/* coin, favCoin[i].qty */}
+                                            {/* , marginTop: 10, marginRight: 15 */}
+                                            <DataTable.Cell> <Image source={{ uri: coin.image }} style={{ height: 20, width: 20, marginRight: 15, }} alt="img" /> <Text style={{ fontWeight: 'normal', fontSize: 17, textTransform: 'capitalize', fontFamily: 'future-pt-book' }}>{coin.symbol}</Text></DataTable.Cell>
+                                            <DataTable.Cell numeric><Text style={{ color: color, fontWeight: 'normal', fontSize: 17 , fontFamily: 'future-pt-book'}}>{coin.price_change_percentage_24h ? coin.price_change_percentage_24h.toFixed(2) : 0.0}%</Text></DataTable.Cell>
+                                            <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17 , fontFamily: 'future-pt-book'}}>${coin.current_price.toFixed(2)}</Text></DataTable.Cell>
+                                            <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17 , fontFamily: 'future-pt-book'}}>{favCoin[i].qty}</Text></DataTable.Cell>
+                                        </DataTable.Row>
+                                    </TouchableOpacity>
                                 )
                             }
                             i++;
@@ -89,9 +98,9 @@ export default function Portfolio({ navigation }) {
                 }
 
             </DataTable>
-            <Button onPress={() => console.log(favCoin)}>press me</Button>
+            {/* <Button onPress={() => console.log(favCoin)}>press me</Button>
             <Button onPress={() => console.log(JSON.stringify(getLocal()))}>getLocal me</Button>
-            <Button onPress={() => console.log(favCoin)}>arr me</Button>
+            <Button onPress={() => console.log(favCoin)}>arr me</Button> */}
 
         </ScrollView>
     )

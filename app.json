@@ -23,7 +23,7 @@
       "favicon": "./assets/favicon.png"
     },
     "android": {
-      "package": "com.crypto"
+      "package": "com.coinapps.coinsimulator"
     }
   }
 }

@@ -37,27 +37,27 @@ export default function Account() {
     return (
         <View>
             <Text style={styles.text}>Account</Text>
-            <TextInput
+            {/* <TextInput
                 label="Quantity"
                 mode='flat'
                 placeholder="Enter quantity you want to purchase"
                 onChangeText={val => setText(val)}
-            />
+            /> */}
             {/* onChangeText={val => setArrayText(text => [...text, val])} */}
-            <Button
+            {/* <Button
                 onPress={() => { 
                     setArrayText(textArray => [...textArray, text]);
                     handleSubmit()
                     }}
             >
                 Submit text
-            </Button> 
+            </Button>  */}
 
-             <Button
+             {/* <Button
                 onPress={() => console.log(handleCheck())}
             >
                 Check local data
-            </Button>
+            </Button> */}
         </View>
     )
 }

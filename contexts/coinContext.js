@@ -10,6 +10,23 @@ export const fetchCoins = async () => {
 
     try {
         const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
+        .catch(error => {
+            alert("Sorry, something went wrong");
+        })
+        // console.log('inside fetchCoins')
+        return data;
+
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export const fetchCoinChart = async (id) => {
+    try {
+        const { data } = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=2`)
+        .catch(error => {
+            alert("Sorry, something went wrong");
+        })
         // console.log('inside fetchCoins')
         return data;
 
@@ -24,7 +41,9 @@ const CoinContextProvider = (props) => {
     // {coin: 'bitcoin', qty: 3,key: 1, avg_price: 10000 },
     // {coin: 'ripple', qty: 3,key: 2, avg_price: 10000 },
     // {coin: 'dogecoin', qty: 3,key: 3, avg_price: 10000 },
-    // {coin: 'tron', qty: 2,key: 4 , avg_price: 10000},
+    // {coin: 'tron', qty: 2,key: 4 , avg_price: 10000, purchase_history: [
+    //      {date: '', qty: '', price: ''}
+    //]},
 
     const [arr, setArr] = useState([]);
 

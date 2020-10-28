@@ -9,28 +9,48 @@ import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export const RootDrawerNavigator = () => (
-    <Navigator initialRouteName="Market">
+    <Navigator initialRouteName="Market" 
+         tabBarOptions={{
+        activeTintColor: '#414e54',
+        inactiveTintColor: '#7f8a9c',
+        labelStyle: {
+            fontFamily: 'future-pt-book',
+            fontSize: 13
+        }
+        
+        // #414e54
+        // activeBackgroundColor: 'white',
+        // inactiveBackgroundColor: 'white',
+      }}
+    >
         <Screen
             name="Market"
             component={MarketNavigator}
             options={{
-                tabBarIcon: () => (
-                    <Entypo name="shop" size={24} color="black" />
+                tabBarIcon: ({color}) => (
+                    <Entypo name="shop" size={30} color={color}/>
                 ),
+
+                tabBarLabel: 'Market',
+                
+                
             }}
         />
         <Screen
             name="PortfolioNavigator"
             component={PortfolioNavigator}
             options={{
-                tabBarIcon: () => (
-                    <MaterialCommunityIcons name="finance" size={24} color="black" />
+                tabBarIcon: ({color}) => (
+                    <MaterialCommunityIcons name="finance" size={30} color={color}  />
                 ),
-                title:"Portfolio"
+                tabBarLabel: 'Portfolio',
+                
+                // title:"Portfolio"
+                
             }}
         />
         
-        <Screen
+        {/* <Screen
             name="Account"
             component={Account}
             options={{
@@ -38,7 +58,7 @@ export const RootDrawerNavigator = () => (
                     <MaterialCommunityIcons name="account" size={24} color="black" />
                 ),
             }}
-        />
+        /> */}
 
     </Navigator>
 );
