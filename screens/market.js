@@ -19,6 +19,7 @@ export default function Market({ navigation }) {
         <ScrollView>
 
             <DataTable>
+            {/*datatable header previous bg color:  #eef2f5 */}
                 <DataTable.Header style={{backgroundColor: '#eef2f5', height: 45}}>
                     <DataTable.Title><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> Coin </Text></DataTable.Title>
                     <DataTable.Title numeric><Text style={{ fontSize: 15, fontWeight: 'normal',  color: 'black' , fontFamily: 'futura-pt-medium'}}> 24h </Text></DataTable.Title>

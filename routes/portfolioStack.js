@@ -16,12 +16,12 @@ const PortfolioNavigator = ({navigation}) => {
                 options={{
                     headerStyle: {
                         height: 90,
-                        backgroundColor: '#414e54',
+                        backgroundColor: '#ffde6a',
                     },
                     headerTitle: 'Portfolio',
                     headerTitleStyle: {
                         fontFamily: 'futura-pt-medium',
-                        color: 'white',
+                        color: 'black',
                         fontSize: 20
                     }
                 }}

@@ -190,7 +190,7 @@ const CoinContextProvider = (props) => {
                         favCoin.splice(i, 1);
                         // favCoin.filter(parseFloat(crypto.qty) !== parseFloat(0))
                         // dispatchCoins({ type: 'REMOVE_COIN', key: crypto.key })
-                        // setLocalCoin();
+                        setLocalCoin();
                     }
                 }
             })

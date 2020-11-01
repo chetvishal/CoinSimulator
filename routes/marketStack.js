@@ -16,14 +16,15 @@ const MarketNavigator = ({navigation}) => {
                 options={{
                     headerStyle: {
                         height: 90,
-                        backgroundColor: '#414e54',
+                        backgroundColor: '#ffde6a',
                         // #414e54 - its shade of black #577fec - its blue
+                        // #ffde6a - its gold from economics explained 
                         
                     },
                     headerTitle: 'Top 100 Coins by Capitalization',
                     headerTitleStyle: {
                         fontFamily: 'futura-pt-medium',
-                        color: 'white',
+                        color: 'black',
                         fontSize: 20
                     }
                     // title: 'MARKET - Top 100 Coins'

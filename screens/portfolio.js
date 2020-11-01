@@ -24,7 +24,7 @@ export default function Portfolio({ navigation }) {
         favCoin && coins && coins.map(coin => {
             var i = 0;
             while (i < favCoin.length) {
-                if (coin.id === favCoin[i].coin) {
+                if (coin.id === favCoin[i].coin && favCoin[i].qty !== 0) {
                     sum = sum + favCoin[i].qty * coin.current_price;
                     break;
                 }
