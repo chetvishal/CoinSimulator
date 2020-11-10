@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
-import { Button, Card, Title, Paragraph, DataTable } from 'react-native-paper';
+import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, RefreshControl } from 'react-native';
+import { DataTable } from 'react-native-paper';
 import { fetchCoins } from '../contexts/coinContext';
 
 export default function Market({ navigation }) {

@@ -96,9 +96,9 @@ export default function CoinPg({ route, navigation, }) {
                     yAxisInterval={1} // optional, defaults to 1
                     xAxisLabel="m"
                     chartConfig={{
-                        backgroundColor: "#e26a00",
-                        backgroundGradientFrom: "#fb8c00",
-                        backgroundGradientTo: "#ffa726",
+                        backgroundColor: "#0036cc",
+                        backgroundGradientFrom: "#0044ff",
+                        backgroundGradientTo: "#4778ff",
                         decimalPlaces: 3, // optional, defaults to 2dp
                         color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                         labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -108,7 +108,7 @@ export default function CoinPg({ route, navigation, }) {
                         propsForDots: {
                             r: "3",
                             strokeWidth: "2",
-                            stroke: "#ffa726"
+                            stroke: "#4778ff"
                         }
                     }}
                     bezier
