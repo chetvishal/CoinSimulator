@@ -33,7 +33,6 @@ export default function CoinPg({ route, navigation, }) {
                 tabBarVisible: true
             });
 
-
     }, []);
 
     const reviewSchema = yup.object({
@@ -56,6 +55,7 @@ export default function CoinPg({ route, navigation, }) {
 
     const commitsData = [0];
 
+    //This function loops
     const setCommitData = () => {
         for (var i = 0; i < arr.prices.length; i++) {
             for (var j = 0; j < 2; j++) {
@@ -65,8 +65,6 @@ export default function CoinPg({ route, navigation, }) {
     }
     if (arr.length !== 0)
         setCommitData();
-
-
 
     return (
         <View style={{ flex: 1 }}>
@@ -87,7 +85,6 @@ export default function CoinPg({ route, navigation, }) {
                                 }
                             ],
                         }
-
                     }
                     width={Dimensions.get("window").width} // from react-native
                     height={220}

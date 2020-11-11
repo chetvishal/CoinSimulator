@@ -7,6 +7,7 @@ export default function Market({ navigation }) {
 
     const [cryptos, setCoins] = useState([]);
 
+    //fetches API from fetchCoins function
     useEffect(() => {
         const fetchAPI = async () => {
             setCoins(await fetchCoins());
