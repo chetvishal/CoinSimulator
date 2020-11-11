@@ -22,9 +22,9 @@ export const fetchCoins = async () => {
 }
 
 //fetches coins Graph data
-export const fetchCoinChart = async (id) => {
+export const fetchCoinChart = async (id, days) => {
     try {
-        const { data } = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=2`)
+        const { data } = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`)
         .catch(error => {
             alert("Sorry, something went wrong");
         })

@@ -17,12 +17,14 @@ export default function CoinPg({ route, navigation, }) {
 
     const [arr, setArr] = useState([]);
 
-    useEffect(() => {
-        const fetchAPI = async () => {
-            setArr(await fetchCoinChart(route.params.id));
-        };
+    const fetchAPI = async (days) => {
+        setArr(await fetchCoinChart(route.params.id, days));
+    };
 
-        fetchAPI()
+    useEffect(() => {
+        
+
+        // fetchAPI(2)
 
         const parent = navigation.dangerouslyGetParent();
         parent.setOptions({
@@ -72,7 +74,8 @@ export default function CoinPg({ route, navigation, }) {
                 {/* Line code starts */}
                 <View style={{ flex: 1, alignItems: 'flex-start', flexDirection: 'row' }}>
                     {/* paddingLeft: 20, */}
-                    <Text style={{ backgroundColor: 'black', color: 'white', borderRadius: 20, height: 40, fontSize: 25, paddingHorizontal: 19, paddingTop: 4, marginHorizontal: 5, marginTop: 10, textAlign: 'justify', flexWrap: 'wrap', textAlign: 'left', fontFamily: 'future-pt-book' }}>2 Days</Text>
+                    <Text onPress={() => fetchAPI(2)} style={{ backgroundColor: 'black', color: 'white', borderRadius: 20, height: 40, fontSize: 25, paddingHorizontal: 19, paddingTop: 4, marginHorizontal: 5, marginTop: 10, textAlign: 'justify', flexWrap: 'wrap', textAlign: 'left', fontFamily: 'future-pt-book' }}>2 Days</Text>
+                    <Text onPress={() => fetchAPI(7)} style={{ backgroundColor: 'black', color: 'white', borderRadius: 20, height: 40, fontSize: 25, paddingHorizontal: 19, paddingTop: 4, marginHorizontal: 5, marginTop: 10, textAlign: 'justify', flexWrap: 'wrap', textAlign: 'left', fontFamily: 'future-pt-book' }}>7 Days</Text>
                     <Text style={{ backgroundColor: 'black', color: 'white', borderRadius: 20, height: 40, fontSize: 25, paddingHorizontal: 19, paddingTop: 4, marginHorizontal: 5, marginTop: 10, textAlign: 'justify', flexWrap: 'wrap', textAlign: 'left', fontFamily: 'future-pt-book', textTransform: 'capitalize' }}>{route.params.id}</Text>
                 </View>
 
