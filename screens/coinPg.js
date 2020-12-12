@@ -22,9 +22,8 @@ export default function CoinPg({ route, navigation, }) {
     };
 
     useEffect(() => {
-        
 
-        // fetchAPI(2)
+        fetchAPI(2)
 
         const parent = navigation.dangerouslyGetParent();
         parent.setOptions({
