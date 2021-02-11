@@ -21,8 +21,8 @@ const PortfolioNavigator = ({navigation}) => {
                     headerTitle: 'Portfolio',
                     headerTitleStyle: {
                         fontFamily: 'futura-pt-medium',
-                        color: 'black',
-                        fontSize: 20
+                        color: '#4C4637',
+                        fontSize: 21
                     }
                 }}
             />

@@ -8,11 +8,11 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/async-storage": "~1.11.0",
     "@react-native-community/masked-view": "^0.1.10",
-    "@react-navigation/bottom-tabs": "^5.11.2",
-    "@react-navigation/native": "^5.8.10",
-    "@react-navigation/stack": "^5.12.8",
+    "@react-navigation/bottom-tabs": "^5.11.7",
+    "@react-navigation/native": "^5.9.2",
+    "@react-navigation/stack": "^5.14.2",
     "axios": "^0.20.0",
     "d3-shape": "^2.0.0",
     "expo": "~38.0.8",
@@ -21,18 +21,17 @@
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
-    "react-native-chart-kit": "^6.8.1",
-    "react-native-gesture-handler": "^1.9.0",
+    "react-native-gesture-handler": "~1.6.0",
     "react-native-paper": "^4.4.1",
-    "react-native-reanimated": "^1.13.2",
-    "react-native-screens": "^2.16.1",
+    "react-native-reanimated": "~1.9.0",
+    "react-native-screens": "~2.9.0",
     "react-native-svg": "12.1.0",
     "react-native-svg-charts": "^5.4.0",
     "react-native-web": "~0.11.7",
     "yup": "^0.29.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
+    "@babel/core": "^7.12.13",
     "babel-preset-expo": "~8.1.0"
   },
   "private": true

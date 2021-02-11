@@ -2,7 +2,6 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import MarketNavigator from './marketStack'
-import Account from '../screens/account'
 import PortfolioNavigator from './portfolioStack'
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -11,16 +10,13 @@ const { Navigator, Screen } = createBottomTabNavigator();
 export const RootDrawerNavigator = () => (
     <Navigator initialRouteName="Market" 
          tabBarOptions={{
-        activeTintColor: '#414e54',
-        inactiveTintColor: '#7f8a9c',
+        activeTintColor: '#4C4637',
+        inactiveTintColor: '#B2AB99',
         labelStyle: {
             fontFamily: 'future-pt-book',
             fontSize: 13
         }
         
-        // #414e54
-        // activeBackgroundColor: 'white',
-        // inactiveBackgroundColor: 'white',
       }}
     >
         <Screen

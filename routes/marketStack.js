@@ -24,8 +24,9 @@ const MarketNavigator = ({navigation}) => {
                     headerTitle: 'Top 100 Coins by Capitalization',
                     headerTitleStyle: {
                         fontFamily: 'futura-pt-medium',
-                        color: 'black',
-                        fontSize: 20
+                        color: '#4C4637',
+                        fontSize: 21,
+                        // textAlign: 'center'
                     }
                     // title: 'MARKET - Top 100 Coins'
                     

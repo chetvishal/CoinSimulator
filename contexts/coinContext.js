@@ -1,15 +1,13 @@
 import React, { createContext, useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-import { coinReducer } from '../reducers/coinReducer';
-import { balanceReducer } from '../reducers/balanceReducer'
 
 export const CoinContext = createContext();
 
-export const fetchCoins = async () => {
+export const fetchCoins = async (no) => {
 
     try {
-        const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
+        const { data } = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${no}&page=1&sparkline=false`)
         .catch(error => {
             alert("Sorry, something went wrong");
         })
@@ -81,7 +79,7 @@ const CoinContextProvider = (props) => {
                 // We have data!!
                 setArr(JSON.parse(value));
                 setFavCoins(JSON.parse(value));
-                console.log('from getLocal',JSON.parse(value));
+                // console.log('from getLocal',JSON.parse(value));
             } else {
                 console.log('array is empty')
             }
@@ -98,7 +96,7 @@ const CoinContextProvider = (props) => {
                 // setArr(JSON.parse(value));
                 // setFavCoins(JSON.parse(value));
                 setBalance(parseFloat(value))
-                console.log('from getLocalBalance',parseFloat(value));
+                // console.log('from getLocalBalance',parseFloat(value));
             } else {
                 console.log('BALANCE1 IS EMPTY')
             }
@@ -107,19 +105,9 @@ const CoinContextProvider = (props) => {
         }
     }
 
-
-    // const [favCoin, dispatchCoins] = useReducer(coinReducer, []
-    //     , () => {
-    //         // const localData = AsyncStorage.getItem('FAVCOINS1');
-    //         // console.log('from favCoin ', JSON.stringify(localData))
-    //         // return localData ? JSON.parse(localData) : [];
-    //         return arr;
-    //     }
-    // );
-
     const [favCoin, setFavCoins] = useState([]); 
 
-    const [balance, setBalance] = useState(50000);
+    const [balance, setBalance] = useState(100000);
 
     useEffect(() => {
         getLocal();
@@ -159,22 +147,12 @@ const CoinContextProvider = (props) => {
             })
             if (!found) {
                 setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), avg_price: price, key: Math.random() * (500 - 1) + 1 }])
-                // dispatchCoins({
-                //     type: 'ADD_COIN', coin: {
-                //         coin: coin, qty: parseFloat(qty).toFixed(2), avg_price: price, key: Math.random() * (500 - 1) + 1
-                //     }
-                // })
-                // setLocalCoin();
+                
             }
         }
         else {
             setFavCoins([...favCoin, { coin: coin, qty: parseFloat(qty).toFixed(2), avg_price: price, key: Math.random() * (500 - 1) + 1 }])
-            // dispatchCoins({
-            //     type: 'ADD_COIN', coin: {
-            //         coin: coin, qty: parseFloat(qty).toFixed(2), avg_price: price, key: Math.random() * (500 - 1) + 1
-            //     }
-            // })
-            // setLocalCoin();
+            
         }
 
     }
@@ -189,8 +167,6 @@ const CoinContextProvider = (props) => {
                     setLocalCoin();
                     if (parseFloat(crypto.qty) === parseFloat(0)) {
                         favCoin.splice(i, 1);
-                        // favCoin.filter(parseFloat(crypto.qty) !== parseFloat(0))
-                        // dispatchCoins({ type: 'REMOVE_COIN', key: crypto.key })
                         setLocalCoin();
                     }
                 }

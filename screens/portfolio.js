@@ -14,7 +14,7 @@ export default function Portfolio({ navigation }) {
 
     useEffect(() => {
         const fetchAPI = async () => {
-            setCoins(await fetchCoins());
+            setCoins(await fetchCoins(150));
         };
 
         fetchAPI()
@@ -41,17 +41,17 @@ export default function Portfolio({ navigation }) {
 
                 <Card.Content style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                     <View>
-                        <Paragraph style={{fontFamily: 'futura-pt-medium', fontSize: 15}}>Portfolio Value</Paragraph>
-                        <Title style={{fontFamily: 'futura-pt-bold', fontWeight: 'bold'}}>${sum.toFixed(2)}</Title>
+                        <Paragraph style={{ fontFamily: 'futura-pt-medium', fontSize: 15 }}>Portfolio Value</Paragraph>
+                        <Title style={{ fontFamily: 'futura-pt-bold', fontWeight: 'bold' }}>${sum.toFixed(2)}</Title>
                     </View>
                     <View style={{}}>
-                        <Paragraph style={{fontFamily: 'futura-pt-medium' , fontSize: 15}}>Balance</Paragraph>
-                        <Title style={{fontFamily: 'futura-pt-bold', fontWeight: 'bold'}}>${balance.toFixed(2)}</Title>
+                        <Paragraph style={{ fontFamily: 'futura-pt-medium', fontSize: 15 }}>Balance</Paragraph>
+                        <Title style={{ fontFamily: 'futura-pt-bold', fontWeight: 'bold' }}>${balance.toFixed(2)}</Title>
                     </View>
                 </Card.Content>
             </Card>
             <DataTable>
-                <DataTable.Header style={{backgroundColor: '#eef2f5', height: 45}}>
+                <DataTable.Header style={{ backgroundColor: '#eef2f5', height: 45 }}>
                     <DataTable.Title><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> Coin </Text></DataTable.Title>
                     <DataTable.Title numeric><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> 24h </Text></DataTable.Title>
                     <DataTable.Title numeric><Text style={{ fontSize: 15, fontWeight: 'normal', color: 'black', fontFamily: 'futura-pt-medium' }}> Price </Text></DataTable.Title>
@@ -76,17 +76,21 @@ export default function Portfolio({ navigation }) {
                                                 avg_price: favCoin[i].avg_price,
                                                 market_cap: coin.market_cap,
                                                 high_24h: coin.high_24h,
-                                                low_24h: coin.low_24h
+                                                low_24h: coin.low_24h,
+                                                circulating_supply: coin.circulating_supply,
+                                                total_supply: coin.total_supply,
+                                                max_supply: coin.max_supply,
+                                                price_change_24h: coin.price_change_24h
                                             })
                                         }}
                                     >
-                                        <DataTable.Row style={{backgroundColor: 'white', height: 70}}>
+                                        <DataTable.Row style={{ backgroundColor: 'white', height: 70 }}>
                                             {/* coin, favCoin[i].qty */}
                                             {/* , marginTop: 10, marginRight: 15 */}
                                             <DataTable.Cell> <Image source={{ uri: coin.image }} style={{ height: 20, width: 20, marginRight: 15, }} alt="img" /> <Text style={{ fontWeight: 'normal', fontSize: 17, textTransform: 'capitalize', fontFamily: 'future-pt-book' }}>{coin.symbol}</Text></DataTable.Cell>
-                                            <DataTable.Cell numeric><Text style={{ color: color, fontWeight: 'normal', fontSize: 17 , fontFamily: 'future-pt-book'}}>{coin.price_change_percentage_24h ? coin.price_change_percentage_24h.toFixed(2) : 0.0}%</Text></DataTable.Cell>
-                                            <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17 , fontFamily: 'future-pt-book'}}>${coin.current_price.toFixed(2)}</Text></DataTable.Cell>
-                                            <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17 , fontFamily: 'future-pt-book'}}>{favCoin[i].qty}</Text></DataTable.Cell>
+                                            <DataTable.Cell numeric><Text style={{ color: color, fontWeight: 'normal', fontSize: 17, fontFamily: 'future-pt-book' }}>{coin.price_change_percentage_24h ? coin.price_change_percentage_24h.toFixed(2) : 0.0}%</Text></DataTable.Cell>
+                                            <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'future-pt-book' }}>${coin.current_price.toFixed(2)}</Text></DataTable.Cell>
+                                            <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'future-pt-book' }}>{favCoin[i].qty}</Text></DataTable.Cell>
                                         </DataTable.Row>
                                     </TouchableOpacity>
                                 )

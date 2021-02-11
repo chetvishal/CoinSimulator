@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { View, Text, Dimensions, StyleSheet } from 'react-native'
+import { View, Text, Dimensions, StyleSheet, ToastAndroid } from 'react-native'
 import { Button, TextInput, DataTable } from 'react-native-paper';
 import { CoinContext } from '../contexts/coinContext';
 import { Formik } from 'formik';
@@ -40,7 +40,7 @@ export function Chartx(props, navigation) {
                 .then((json) => {
                     setChartData(json.prices);
                 })
-                .catch(function(error) { console.log(error) })
+                .catch(function (error) { console.log(error) })
                 .finally(setisLoading(false));
         }
 
@@ -56,13 +56,14 @@ export function Chartx(props, navigation) {
         xVal.push(key);
         yVal.push(chartData[key]['1']);
     }
-    console.log(chartData);
+    // console.log(chartData);
     const contentInset = { top: 10, bottom: 10 };
 
     return (
         <View>
             <ScrollView
                 horizontal={true}
+                showsHorizontalScrollIndicator={false}
             >
                 <View style={{ flex: 1, alignItems: 'flex-start', flexDirection: 'row' }}>
                     {/* paddingLeft: 20, */}
@@ -163,8 +164,13 @@ export default function CoinPg({ route, navigation, }) {
             })
     })
 
-    // console.log(route)
     const { addCoin, balance, setBalance } = useContext(CoinContext);
+
+    function thousands_separators(num) {
+        var num_parts = num.toString().split(".");
+        num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return num_parts.join(".");
+    }
 
     // const commitsData = [0];
 
@@ -191,45 +197,6 @@ export default function CoinPg({ route, navigation, }) {
                 </View>
 
                 {Chartx(route.params.id)}
-
-                {/* <LineChart
-                    data={
-                        {
-                            datasets: [
-                                {
-                                    data: commitsData
-                                }
-                            ],
-                        }
-                    }
-                    width={Dimensions.get("window").width} // from react-native
-                    height={220}
-                    yAxisLabel="$"
-                    // yAxisSuffix="k"
-                    yAxisInterval={1} // optional, defaults to 1
-                    xAxisLabel="m"
-                    chartConfig={{
-                        backgroundColor: "#0036cc",
-                        backgroundGradientFrom: "#0044ff",
-                        backgroundGradientTo: "#4778ff",
-                        decimalPlaces: 3, // optional, defaults to 2dp
-                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                        style: {
-                            borderRadius: 16
-                        },
-                        propsForDots: {
-                            r: "3",
-                            strokeWidth: "2",
-                            stroke: "#4778ff"
-                        }
-                    }}
-                    bezier
-                    style={{
-                        marginVertical: 8,
-                        // borderRadius: 16
-                    }}
-                /> */}
                 {/* Line code ends */}
                 <DataTable.Row style={{ backgroundColor: 'white', height: 70 }}>
                     {/* , marginTop: 10, marginRight: 15 */}
@@ -240,7 +207,7 @@ export default function CoinPg({ route, navigation, }) {
                 <DataTable.Row style={{ backgroundColor: 'white', height: 70 }}>
                     {/* , marginTop: 10, marginRight: 15 */}
                     <DataTable.Cell ><Text style={{ fontWeight: 'normal', fontSize: 17, textTransform: 'capitalize', fontFamily: 'futura-pt-bold' }}>Market Cap</Text></DataTable.Cell>
-                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>${route.params.market_cap}</Text></DataTable.Cell>
+                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>${thousands_separators(route.params.market_cap)}</Text></DataTable.Cell>
                 </DataTable.Row>
 
                 <DataTable.Row style={{ backgroundColor: 'white', height: 70 }}>
@@ -258,25 +225,29 @@ export default function CoinPg({ route, navigation, }) {
                 <DataTable.Row style={{ backgroundColor: 'white', height: 70 }}>
                     {/* , marginTop: 10, marginRight: 15 */}
                     <DataTable.Cell ><Text style={{ fontWeight: 'normal', fontSize: 17, textTransform: 'capitalize', fontFamily: 'futura-pt-bold' }}>Circulating supply</Text></DataTable.Cell>
-                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>${route.params.circulating_supply}</Text></DataTable.Cell>
+                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>${thousands_separators(route.params.circulating_supply.toFixed(2))}</Text></DataTable.Cell>
                 </DataTable.Row>
 
                 <DataTable.Row style={{ backgroundColor: 'white', height: 70 }}>
                     {/* , marginTop: 10, marginRight: 15 */}
                     <DataTable.Cell ><Text style={{ fontWeight: 'normal', fontSize: 17, textTransform: 'capitalize', fontFamily: 'futura-pt-bold' }}>Total supply</Text></DataTable.Cell>
-                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>${route.params.total_supply}</Text></DataTable.Cell>
+                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>${route.params.total_supply ? thousands_separators(route.params.total_supply) : 0}</Text></DataTable.Cell>
                 </DataTable.Row>
 
                 <DataTable.Row style={{ backgroundColor: 'white', height: 70 }}>
                     {/* , marginTop: 10, marginRight: 15 */}
                     <DataTable.Cell ><Text style={{ fontWeight: 'normal', fontSize: 17, textTransform: 'capitalize', fontFamily: 'futura-pt-bold' }}>Max supply</Text></DataTable.Cell>
-                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>${route.params.max_supply}</Text></DataTable.Cell>
+                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>${route.params.max_supply ? thousands_separators(route.params.max_supply) : 0}</Text></DataTable.Cell>
                 </DataTable.Row>
 
                 <DataTable.Row style={{ backgroundColor: 'white', height: 70 }}>
                     {/* , marginTop: 10, marginRight: 15 */}
                     <DataTable.Cell ><Text style={{ fontWeight: 'normal', fontSize: 17, textTransform: 'capitalize', fontFamily: 'futura-pt-bold' }}>24H Change</Text></DataTable.Cell>
-                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>${route.params.price_change_24h}</Text></DataTable.Cell>
+                    <DataTable.Cell numeric><Text style={{ fontWeight: 'normal', fontSize: 17, fontFamily: 'futura-pt-medium' }}>{route.params.price_change_24h ? 
+                    route.params.price_change_24h.toFixed(2) < 0 ? 
+                    `-$${route.params.price_change_24h.toFixed(2)*-1}` : 
+                    `$${route.params.price_change_24h.toFixed(2)}`
+                    : 0}</Text></DataTable.Cell>
                 </DataTable.Row>
 
             </ScrollView>
@@ -288,6 +259,11 @@ export default function CoinPg({ route, navigation, }) {
                         setBalance(balance - (values.quantity * route.params.current_price));
                         addCoin(route.params.id, values.quantity, route.params.current_price)
                         actions.resetForm();
+                        ToastAndroid.showWithGravity(
+                            'successfully purchased!',
+                            ToastAndroid.SHORT,
+                            ToastAndroid.CENTER
+                        )
                         navigation.navigate('Market');
                     }}
                     validationSchema={reviewSchema}
